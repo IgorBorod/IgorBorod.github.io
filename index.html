@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <style>
+    BODY {
+  align-items: center;
+  justify-content: center;
+  background: green;
+  font-family: Comic Sans MS;
+  }
+
+H1 {
+  font-size: 50px;
+  font-weight: normal;
+  cursor: pointer;
+  text-shadow: 0 0 15px #999;
+  color: transparent;
+  transition: all .5s;
+  }
+  H1:hover {
+    text-shadow: 0 0 0px #333;
+    cursor: pointer;
+    }
+  {
+   </style>
+ <script> 
+ function func1(){ 
+ var a;
+ a=Number(document.getElementById("a_znach").value);
+ document.getElementById("kont_a").innerHTML ="<h1>"+"Периметр "+ a*4+"</h1>";
+ }
+ function func2(){
+var r=Number(document.getElementById("b_znach").value);
+var d=r*2;
+ document.getElementById("b").innerHTML ="<h1>"+"Диаметр"+"<br>"+ r*2+" "+d+"</h1>";
+ }
+ 
+  function func3(){
+var r=Number(document.getElementById("c_znach").value);
+var d=r*2;
+ document.getElementById("c").innerHTML ="<h1>"+"Площадь боковой  поверхности "+"<br>"+ r*2+" "+d+"</h1>";
+ }
+ 
+ function func4(){ 
+ var q;
+ a=Number(document.getElementById("d_znach").value);
+ document.getElementById("s").innerHTML ="<h1>"+"ответ "+"<br>"+ Math.sqrt((q+6350)*(q+6350)-6350*6350)+"</h1>";
+ }
+ 
+ </script>
+ </head>
+ <body>
+  <h1>Задача 1.25</h1>
+  Сторона квадрата a=<input type="text" value="66" id="a_znach">
+  <button onclick="func1()">1.25</button>
+  <div id="kont_a"></div>
+  
+  
+  
+  <h1>Задача 1.26</h1>
+  Радиус r=<input type="text" value="0" id="b_znach">
+  <button onclick="func2()">1.26</button>
+  <div id="b"></div> 
+  
+  
+  <h1>Задача 1.28</h1>
+  Длина грани=<input type="text" value="0" id="c_znach">
+  <button onclick="func3()">1.28</button>
+  <div id="c"></div> 
+  
+ 
+   <h1>Задача 1.27</h1>
+Длина касательной=<input type="text" value="0" id="d_znach">
+  <button onclick="func4()">1.27</button>
+  <div id="s"></div> 
+  
+
+  
+  </body> 
+ </html>

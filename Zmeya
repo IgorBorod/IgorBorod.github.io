@@ -1,0 +1,92 @@
+GlowScript 2.9 VPython
+scene.width = 1280  # default is 640
+scene.height = 800  # default is 400
+scene.userzoom = True
+scene.userspin = False
+scene.autoscale = True
+scene.camera.range = 9
+scene.forward = vector(0,0,-10)
+ccc=1
+snake = sphere(pos=vector(0,0,0),color=vector(random(),random(),random()),radius=1,make_trail=True, trail_radius=1, trail_color=color.white,   trail_type="points", interval=5, retain=ccc )
+wall1=box(pos = vector(50,0,50), length=1, height=100, width=1)
+wall2=box(pos = vector(-50,0,50), length=1, height=100, width=1)
+wall3=box(pos = vector(0,50,0), length=150, height=1, width=1)
+wall4=box(pos = vector(0,-50,0), length=150, height=1, width=1)
+
+for i in range(0,40,1):
+    scene.camera.pos = vector(0,0,i)
+    sleep(0.00001)
+    scene.autoscale = False   
+
+balls=[]    
+snakepos=[]        
+v = vec(0,0,0)
+
+
+dv = 0.3
+score=0
+t=text(text='My score is =  '+score,color=color.green)
+time=0
+while True:
+    rate(30)
+    rndSign1=random()
+    if rndSign1>=0.5:
+        rndSign1=1
+    else:
+        rndSign1=-1
+    rndSign2=random()
+    if rndSign2>=0.5:
+        rndSign2=1
+    else:
+        rndSign2=-1  
+    k = keysdown() # a list of keys that are down
+    if 'right' in k or 'left' in k: 
+        head.axis=vec(4,0,0)
+    if 'up' in k or 'down' in k:   
+        head.axis=vec(0,4,0) 
+    if 'left' in k:
+        v.x = -dv
+        v.y=0
+    if 'right' in k :
+        v.x = dv
+        v.y=0
+    if 'up' in k :
+        v.y = dv  
+        v.x=0
+    if 'down' in k :    
+        v.y = -dv  
+        v.x=0
+    snake.pos += v
+    if time%5==0:
+        createAstID= sphere( make_trail=False, trail_color=vector(random(),0,random()), visible=True, pos=vector(random()*50*rndSign1,random()*50*rndSign2,0),color=vector(random(),random(),random()))
+        balls.append(createAstID)
+
+    if time%5==1:
+        createAstID= cone( make_trail=False, trail_color=vector(random(),0,random()), visible=True, pos=vector(random()*50*rndSign1,random()*50*rndSign2,0),color=vector(random(),random(),random()))
+        balls.append(createAstID)
+    if time%5==0:
+        createAstID= box( make_trail=False, trail_color=vector(random(),0,random()), visible=True, pos=vector(random()*50*rndSign1,random()*50*rndSign2,0),color=vector(random(),random(),random()))
+        balls.append(createAstID)
+        
+    if snake.pos.y > 50 or snake.pos.y < -50 or snake.pos.x > 50 or snake.pos.x < -50: snake.visible=False
+    
+    if snake.pos.y > 50: snake.pos.y += 100
+    
+    if snake.pos.y < -50: snake.pos.y -= 100
+    
+    if snake.pos.x > 50: snake.pos.x += 100
+    
+    if snake.pos.y < -50: snake.pos.x -= 100
+
+        
+    for i in range(len(balls)):
+        if abs(snake.pos.x-balls[i].pos.x)<1 and abs(snake.pos.y-balls[i].pos.y)<1 and balls[i].visible==True :
+            snake.color=balls[i].color
+            balls[i].visible=False
+            ccc=ccc+1  
+            snake.retain=ccc    
+            score +=1
+            t.color = color.black
+            t=text(text='My score is =  '+score,color=color.green)
+    time = time +1
+    
